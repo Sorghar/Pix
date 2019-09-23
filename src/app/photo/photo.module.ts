@@ -5,10 +5,12 @@ import { photoReducer } from './state/reducer';
 import { PhotoDetailComponent } from './photo-detail/photo-detail.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { NewPhotoComponent } from './new-photo/new-photo.component';
+import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [PhotoDetailComponent, PhotoListComponent, NewPhotoComponent],
   imports: [
+    HttpClientModule,
     CommonModule,
     StoreModule.forFeature('photos', photoReducer)
   ]

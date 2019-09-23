@@ -1,5 +1,9 @@
 export class User {
   id: number;
-  firstName: string;
-  lastName: string;
+  fullName: string;
+
+  constructor(id: number, fullName: string) {
+    this.id = id;
+    this.fullName = fullName;
+  }
 }

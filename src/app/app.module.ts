@@ -9,25 +9,27 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { AlbumModule } from './album/album.module';
 import { PhotoModule } from './photo/photo.module';
+import { CoreModule } from './core/core.module';
+import { AlbumEffects } from './album/state/effects';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
+    AppRoutingModule,
+    BrowserModule,
+    CoreModule,
+    NgbModule,
     AlbumModule,
     PhotoModule,
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
     StoreModule.forRoot({}),
-        EffectsModule.forRoot([
-        ]),
-        StoreDevtoolsModule.instrument({
-            name: 'APM Demo App DevTools',
-            maxAge: 25,
-            logOnly: environment.production,
-        })
+    EffectsModule.forRoot([AlbumEffects]),
+    StoreDevtoolsModule.instrument({
+      name: 'APM Demo App DevTools',
+      maxAge: 25,
+      logOnly: environment.production,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

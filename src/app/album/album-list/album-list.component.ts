@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AlbumsService } from 'src/app/core/services/albums.service';
-import { PhotosService } from 'src/app/core/services/photos.service';
-import { UsersService } from 'src/app/core/services/users.service';
+import { Album } from 'src/app/core/models/album';
+import { Observable } from 'rxjs';
+import { AlbumState } from '../state/state';
+import { Store, select } from '@ngrx/store';
+import { LoadAlbums } from '../state/actions';
+import { getAllAlbums } from '../state/selectors';
 
 @Component({
   selector: 'app-album-list',
@@ -10,24 +13,12 @@ import { UsersService } from 'src/app/core/services/users.service';
 })
 export class AlbumListComponent implements OnInit {
 
-  constructor(private albumService: AlbumsService,
-              private photosService: PhotosService,
-              private userService: UsersService) { }
+  albums$: Observable<Album[]>;
+
+  constructor(private store: Store<AlbumState>) { }
 
   ngOnInit() {
+    this.albums$ = this.store.pipe(select(getAllAlbums));
+    this.store.dispatch(new LoadAlbums());
   }
-
-
-  test() {
-    this.albumService.getAll().subscribe();
-  }
-
-  test2() {
-    this.photosService.getAlbumPhotos(218).subscribe();
-  }
-
-  test3() {
-    this.userService.getAll().subscribe();
-  }
-
 }

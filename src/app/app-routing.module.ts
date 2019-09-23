@@ -4,8 +4,7 @@ import { AlbumListComponent } from './album/album-list/album-list.component';
 
 
 const routes: Routes = [
-  { path: 'albums', component: AlbumListComponent },
-  { path: '', redirectTo: 'albums', pathMatch: 'full'} // <- Default route
+  { path: '', redirectTo: 'albums', pathMatch: 'full'}, // <- Default route
 ];
 
 @NgModule({

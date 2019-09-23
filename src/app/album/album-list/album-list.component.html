@@ -2,7 +2,10 @@
   <h2>Albums</h2>
   <ul class="albums">
     <li *ngFor="let a of albums$ | async">
-      Title: {{a.title}}
+      <a>Title: {{a.title}} {{a.id}}</a>
     </li>
   </ul>
+</div>
+<div>
+  <router-outlet></router-outlet>
 </div>

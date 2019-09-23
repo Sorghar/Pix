@@ -1,1 +1,8 @@
-<p>album-list works! Fakt</p>
+<div>
+  <h2>Albums</h2>
+  <ul class="albums">
+    <li *ngFor="let a of albums$ | async">
+      Title: {{a.title}}
+    </li>
+  </ul>
+</div>

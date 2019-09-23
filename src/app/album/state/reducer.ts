@@ -1,6 +1,15 @@
 import { AlbumState, initialState } from './state';
-import { AlbumActions } from './actions';
+import { AlbumActions, AlbumActionTypes } from './actions';
 
 export function albumReducer(state = initialState, action: AlbumActions): AlbumState {
-  return null;
+  switch (action.type) {
+    case AlbumActionTypes.LoadAlbumsSuccess:
+      return {
+        ...state,
+        albumList: action.payload
+      };
+
+    default:
+      return state;
+  }
 }

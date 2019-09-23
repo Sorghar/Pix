@@ -1,12 +1,23 @@
-import { Actions } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { AlbumsService } from 'src/app/core/services/albums.service';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { Action } from '@ngrx/store';
+import * as albumActions from './actions';
 
 @Injectable()
 export class AlbumEffects {
-    constructor(
-        private actions$: Actions,
-        private albumsService: AlbumsService
-    ) {
-    }
-  }
+  constructor(
+    private actions$: Actions,
+    private albumsService: AlbumsService
+  ) { }
+
+  @Effect()
+  loadAlbums$: Observable<Action> = this.actions$.pipe(
+    ofType(albumActions.AlbumActionTypes.LoadAlbums),
+    switchMap(action => this.albumsService.getAll().pipe(
+      map(albums => (new albumActions.LoadAlbumsSuccess(albums)))
+    ))
+  );
+}

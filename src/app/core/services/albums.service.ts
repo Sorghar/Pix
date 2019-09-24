@@ -18,7 +18,7 @@ export class AlbumsService {
    public getAll(): Observable<Album[]> {
     return this.http.get(this.url, httpOptions).pipe(
       map((res: any) =>  res.result),
-      map((arr: Array<any>) => arr.map(i => (new Album(i.id, i.user_id, i.title)))),
+      map((arr: Array<any>) => arr.map(i => (new Album(+i.id, +i.user_id, i.title)))),
     );
   }
 

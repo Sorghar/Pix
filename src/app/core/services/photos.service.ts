@@ -25,7 +25,7 @@ export class PhotosService {
       tap(console.log),
       map((res: any) => res.result),
       // map((a: Array<any>) => a.filter(i => (i.album_id === albumId.toString()))),
-      map((res: Array<any>) => res.map(i => new Photo(i.id, i.title, i.thumbnail, i.url))),
+      map((res: Array<any>) => res.slice(0, 8).map(i => new Photo(i.id, i.title, i.thumbnail, i.url))),
       tap(console.log)
     );
   }

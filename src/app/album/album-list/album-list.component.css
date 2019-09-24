@@ -20,6 +20,11 @@ li:active{
   color: blue;
 }
 
+li.selected{
+  color: blue;
+  font-weight: bold;
+}
+
 .searchBox {
   width: 100%;
 }

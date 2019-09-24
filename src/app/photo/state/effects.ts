@@ -16,7 +16,6 @@ export class PhotoEffects {
       @Effect()
       loadPhotos$: Observable<Action> = this.actions$.pipe(
         ofType(PhotoActionTypes.LoadAction),
-        tap(() => console.log('in effect')),
         switchMap((action: LoadPhoto) => this.photosService.getAlbumPhotos(action.payload).pipe(
           map(photos => (new LoadPhotoSuccess(photos)))
         ))

@@ -1,5 +1,6 @@
 import { AlbumState, initialState } from './state';
-import { AlbumActions, AlbumActionTypes } from './actions';
+import { AlbumActions } from './actions';
+import { AlbumActionTypes } from 'src/app/core/state/actions';
 
 export function albumReducer(state = initialState, action: AlbumActions): AlbumState {
   switch (action.type) {

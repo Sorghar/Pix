@@ -6,6 +6,7 @@ import { LoadPhoto } from '../state/actions';
 import { Photo } from 'src/app/core/models/photo';
 import { Observable, Subscription } from 'rxjs';
 import { getCurrentAlbumPhotos } from '../state/selectors';
+import { SetCurrentAlbumId } from 'src/app/core/state/actions';
 
 @Component({
   selector: 'app-photo-list',
@@ -22,11 +23,11 @@ export class PhotoListComponent implements OnInit, OnDestroy {
               private store: Store<PhotoState>) { }
 
   ngOnInit() {
-    this.dispatchLoadPhotos();
     this.photos$ = this.store.select(getCurrentAlbumPhotos);
+    this.dispatchActions();
     this.sub = this.router.events.subscribe((e: Event) => {
       if (e instanceof NavigationEnd) {
-        this.dispatchLoadPhotos();
+        this.dispatchActions();
       }
     });
   }
@@ -35,8 +36,9 @@ export class PhotoListComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  private dispatchLoadPhotos() {
+  private dispatchActions() {
     const id = +this.route.snapshot.paramMap.get('id');
+    this.store.dispatch(new SetCurrentAlbumId(id));
     this.store.dispatch(new LoadPhoto(id));
   }
 

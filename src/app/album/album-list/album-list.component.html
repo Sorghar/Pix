@@ -3,7 +3,9 @@
     <input class="searchBox" placeholder="Search Albums by Title" #searchBox id="search-box" (input)="search(searchBox.value)" />
     <h2>Albums</h2>
     <ul class="albums">
-      <li *ngFor="let a of filteredAlbums$ | async" [routerLink]="['/albums', a.id]" (click)="selectAlbum(a)">
+      <li *ngFor="let a of filteredAlbums$ | async"
+          [routerLink]="['/albums', a.id]"
+          [ngClass]="a.id === (currentAlbum$ | async)?.id ? 'selected' : ''">
         {{a.title}}
       </li>
     </ul>

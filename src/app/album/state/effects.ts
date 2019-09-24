@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { Action } from '@ngrx/store';
-import * as albumActions from './actions';
+import { AlbumActionTypes } from 'src/app/core/state/actions';
+import { LoadAlbumsSuccess } from './actions';
 
 @Injectable()
 export class AlbumEffects {
@@ -15,9 +16,9 @@ export class AlbumEffects {
 
   @Effect()
   loadAlbums$: Observable<Action> = this.actions$.pipe(
-    ofType(albumActions.AlbumActionTypes.LoadAlbums),
+    ofType(AlbumActionTypes.LoadAlbums),
     switchMap(action => this.albumsService.getAll().pipe(
-      map(albums => (new albumActions.LoadAlbumsSuccess(albums)))
+      map(albums => (new LoadAlbumsSuccess(albums)))
     ))
   );
 }

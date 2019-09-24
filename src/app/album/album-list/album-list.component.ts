@@ -5,8 +5,9 @@ import { AlbumState } from '../state/state';
 import { Store, select } from '@ngrx/store';
 import { debounceTime, distinctUntilChanged, switchMap, map, tap } from 'rxjs/operators';
 import { isNull } from 'util';
-import { LoadAlbums, SetCurrentAlbumId } from '../state/actions';
+import { LoadAlbums } from '../state/actions';
 import { getAllAlbums, getCurrentAlbum } from '../state/selectors';
+import { SetCurrentAlbumId } from 'src/app/core/state/actions';
 
 @Component({
   selector: 'app-album-list',
@@ -21,8 +22,7 @@ export class AlbumListComponent implements OnInit {
   currentAlbum$: Observable<Album>;
 
   constructor(
-    private store: Store<AlbumState>
-  ) { }
+    private store: Store<AlbumState>) { }
 
   ngOnInit() {
     this.albums$ = this.store.pipe(select(getAllAlbums));
@@ -41,9 +41,5 @@ export class AlbumListComponent implements OnInit {
 
   search(searchTerm: string) {
     this.searchTerms.next(searchTerm);
-  }
-
-  selectAlbum(album: Album) {
-    this.store.dispatch(new SetCurrentAlbumId(album.id));
   }
 }

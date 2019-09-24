@@ -1,11 +1,13 @@
-<div>
-  <h2>Albums</h2>
-  <ul class="albums">
-    <li *ngFor="let a of albums$ | async">
-      <a>Title: {{a.title}} {{a.id}}</a>
-    </li>
-  </ul>
-</div>
-<div>
-  <router-outlet></router-outlet>
+<div class="grid-container">
+  <div class="grid-item">
+    <h2>Albums</h2>
+    <ul class="albums">
+      <li *ngFor="let a of albums$ | async" [routerLink]="['/albums', a.id]">
+        {{a.title}}
+      </li>
+    </ul>
+  </div>
+  <div class="grid-item">
+    <router-outlet></router-outlet>
+  </div>
 </div>

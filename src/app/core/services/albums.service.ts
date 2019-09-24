@@ -19,7 +19,6 @@ export class AlbumsService {
     return this.http.get(this.url, httpOptions).pipe(
       map((res: any) =>  res.result),
       map((arr: Array<any>) => arr.map(i => (new Album(i.id, i.user_id, i.title)))),
-      tap(console.log)
     );
   }
 

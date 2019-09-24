@@ -19,3 +19,7 @@ li:hover{
 li:active{
   color: blue;
 }
+
+.searchBox {
+  width: 100%;
+}

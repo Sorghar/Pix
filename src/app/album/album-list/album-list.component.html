@@ -1,8 +1,9 @@
 <div class="grid-container">
   <div class="grid-item">
+    <input class="searchBox" placeholder="Search Albums by Title" #searchBox id="search-box" (input)="search(searchBox.value)" />
     <h2>Albums</h2>
     <ul class="albums">
-      <li *ngFor="let a of albums$ | async" [routerLink]="['/albums', a.id]">
+      <li *ngFor="let a of filteredAlbums$ | async" [routerLink]="['/albums', a.id]">
         {{a.title}}
       </li>
     </ul>

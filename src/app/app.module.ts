@@ -11,6 +11,7 @@ import { AlbumModule } from './album/album.module';
 import { PhotoModule } from './photo/photo.module';
 import { CoreModule } from './core/core.module';
 import { AlbumEffects } from './album/state/effects';
+import { PhotoEffects } from './photo/state/effects';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { AlbumEffects } from './album/state/effects';
     AlbumModule,
     PhotoModule,
     StoreModule.forRoot({}),
-    EffectsModule.forRoot([AlbumEffects]),
+    EffectsModule.forRoot([AlbumEffects, PhotoEffects]),
     StoreDevtoolsModule.instrument({
       name: 'APM Demo App DevTools',
       maxAge: 25,

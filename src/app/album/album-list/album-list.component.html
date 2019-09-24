@@ -3,12 +3,15 @@
     <input class="searchBox" placeholder="Search Albums by Title" #searchBox id="search-box" (input)="search(searchBox.value)" />
     <h2>Albums</h2>
     <ul class="albums">
-      <li *ngFor="let a of filteredAlbums$ | async" [routerLink]="['/albums', a.id]">
+      <li *ngFor="let a of filteredAlbums$ | async" [routerLink]="['/albums', a.id]" (click)="selectAlbum(a)">
         {{a.title}}
       </li>
     </ul>
   </div>
-  <div class="grid-item">
+  <div class="grid-item" >
+    <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0" *ngIf="currentAlbum$ | async as currentAlbum">
+      Photos of album {{currentAlbum.title}}
+    </h1>
     <router-outlet></router-outlet>
   </div>
 </div>

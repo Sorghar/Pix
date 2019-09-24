@@ -8,7 +8,11 @@ export function albumReducer(state = initialState, action: AlbumActions): AlbumS
         ...state,
         albumList: action.payload
       };
-
+    case AlbumActionTypes.SetCurrentAlbumId:
+      return {
+        ...state,
+        currentAlbumId: action.payload
+      };
     default:
       return state;
   }

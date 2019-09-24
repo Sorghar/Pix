@@ -3,10 +3,10 @@ import { Album } from 'src/app/core/models/album';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AlbumState } from '../state/state';
 import { Store, select } from '@ngrx/store';
-import { LoadAlbums } from '../state/actions';
-import { getAllAlbums } from '../state/selectors';
 import { debounceTime, distinctUntilChanged, switchMap, map, tap } from 'rxjs/operators';
 import { isNull } from 'util';
+import { LoadAlbums, SetCurrentAlbumId } from '../state/actions';
+import { getAllAlbums, getCurrentAlbum } from '../state/selectors';
 
 @Component({
   selector: 'app-album-list',
@@ -18,6 +18,7 @@ export class AlbumListComponent implements OnInit {
   private albums$: Observable<Album[]>;
   private searchTerms = new BehaviorSubject<string>(null);
   filteredAlbums$: Observable<Album[]>;
+  currentAlbum$: Observable<Album>;
 
   constructor(
     private store: Store<AlbumState>
@@ -25,6 +26,7 @@ export class AlbumListComponent implements OnInit {
 
   ngOnInit() {
     this.albums$ = this.store.pipe(select(getAllAlbums));
+    this.currentAlbum$ = this.store.pipe(select(getCurrentAlbum));
     this.store.dispatch(new LoadAlbums());
 
     this.filteredAlbums$ = this.searchTerms.pipe(
@@ -39,5 +41,9 @@ export class AlbumListComponent implements OnInit {
 
   search(searchTerm: string) {
     this.searchTerms.next(searchTerm);
+  }
+
+  selectAlbum(album: Album) {
+    this.store.dispatch(new SetCurrentAlbumId(album.id));
   }
 }

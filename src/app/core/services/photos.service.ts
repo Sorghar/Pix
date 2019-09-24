@@ -19,12 +19,12 @@ export class PhotosService {
   public getAlbumPhotos(albumId: number): Observable<Photo[]> {
     const myHttpOptions = {
       ...httpOptions,
-      params: { album_id: '218' }
+      params: { album_id: albumId.toString() }
     };
-
     return this.http.get(`${apiUrl}/${this.urlPostfix}`, myHttpOptions).pipe(
+      tap(console.log),
       map((res: any) => res.result),
-      map((a: Array<any>) => a.filter(i => (i.album_id === albumId.toString()))),
+      // map((a: Array<any>) => a.filter(i => (i.album_id === albumId.toString()))),
       map((res: Array<any>) => res.map(i => new Photo(i.id, i.title, i.thumbnail, i.url))),
       tap(console.log)
     );

@@ -10,7 +10,8 @@ const routes: Routes = [
     children: [
       {
         path: ':id',
-        component: PhotoListComponent
+        component: PhotoListComponent,
+        children: [{path: 'photos', loadChildren: () => import('../photo/photo.module').then(x => x.PhotoModule)}]
       }
     ]
   }

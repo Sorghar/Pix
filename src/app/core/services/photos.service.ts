@@ -22,11 +22,8 @@ export class PhotosService {
       params: { album_id: albumId.toString() }
     };
     return this.http.get(`${apiUrl}/${this.urlPostfix}`, myHttpOptions).pipe(
-      tap(console.log),
       map((res: any) => res.result),
-      // map((a: Array<any>) => a.filter(i => (i.album_id === albumId.toString()))),
-      map((res: Array<any>) => res.slice(0, 8).map(i => new Photo(i.id, i.title, i.thumbnail, i.url))),
-      tap(console.log)
+      map((res: Array<any>) => res.slice(0, 8).map(i => new Photo(+i.id, i.title, i.thumbnail, i.url))),
     );
   }
 }

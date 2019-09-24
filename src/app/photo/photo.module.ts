@@ -6,12 +6,12 @@ import { PhotoDetailComponent } from './photo-detail/photo-detail.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { NewPhotoComponent } from './new-photo/new-photo.component';
 import { HttpClientModule} from '@angular/common/http';
-import { EffectsModule } from '@ngrx/effects';
-import { PhotoEffects } from './state/effects';
+import { PhotoRoutingModule } from './photo-routing.module';
 
 @NgModule({
   declarations: [PhotoDetailComponent, PhotoListComponent, NewPhotoComponent],
   imports: [
+    PhotoRoutingModule,
     HttpClientModule,
     CommonModule,
     StoreModule.forFeature('photos', photoReducer)

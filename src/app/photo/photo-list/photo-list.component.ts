@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, Event, NavigationEnd } from '@angular/router';
 import { PhotoState } from '../state/state';
 import { Store } from '@ngrx/store';
-import { LoadPhoto } from '../state/actions';
+import { LoadPhotos } from '../state/actions';
 import { Photo } from 'src/app/core/models/photo';
 import { Observable, Subscription } from 'rxjs';
 import { getCurrentAlbumPhotos } from '../state/selectors';
@@ -39,7 +39,7 @@ export class PhotoListComponent implements OnInit, OnDestroy {
   private dispatchActions() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.store.dispatch(new SetCurrentAlbumId(id));
-    this.store.dispatch(new LoadPhoto(id));
+    this.store.dispatch(new LoadPhotos(id));
   }
 
 }

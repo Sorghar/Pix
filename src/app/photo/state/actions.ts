@@ -4,18 +4,25 @@ import { Action } from '@ngrx/store';
 export enum PhotoActionTypes {
   LoadAction = '[Photo] Load',
   LoadActionSuccess = '[Photo] Load success',
+  SetCurrentPhotoId = '[Photo] Set Current Photo Id'
 }
 
-export class LoadPhoto implements Action {
+export class LoadPhotos implements Action {
   readonly type = PhotoActionTypes.LoadAction;
   constructor(public payload: number) {}
 }
 
-export class LoadPhotoSuccess implements Action {
+export class LoadPhotosSuccess implements Action {
   readonly type = PhotoActionTypes.LoadActionSuccess;
   constructor(public payload: Photo[]) {}
 }
 
+export class SetCurrentPhotoId implements Action {
+  readonly type = PhotoActionTypes.SetCurrentPhotoId;
+  constructor(public payload: number) {}
+}
+
 export type PhotoActions =
-  LoadPhoto |
-  LoadPhotoSuccess;
+  LoadPhotos |
+  LoadPhotosSuccess |
+  SetCurrentPhotoId;

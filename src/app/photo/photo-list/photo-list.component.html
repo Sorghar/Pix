@@ -1,13 +1,14 @@
 <div class="grid-container">
   <div class="grid-item">
-    <!-- <router-outlet></router-outlet> -->
-    Router outlet
+    <div class="photo">
+      <router-outlet></router-outlet>
+    </div>
   </div>
   <div class="grid-item">
     <div class="container">
       <div class="row text-center text-lg-left" *ngIf="photos$ | async as photos">
         <div class="col-lg-3 col-md-4 col-6" *ngFor="let photo of photos">
-          <a class="d-block mb-4 h-100">
+          <a [routerLink]="['photos', photo.id]" class="d-block mb-4 h-100">
             <img class="img-fluid img-thumbnail" src="{{photo.thumbnailUrl}}" alt="">
             <div>{{photo.title.split(' ').slice(0,2).join(' ')}}...</div>
           </a>

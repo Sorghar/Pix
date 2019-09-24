@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { switchMap, map, tap } from 'rxjs/operators';
-import { PhotoActionTypes, LoadPhoto, LoadPhotoSuccess } from './actions';
+import { PhotoActionTypes, LoadPhotos, LoadPhotosSuccess } from './actions';
 
 @Injectable()
 export class PhotoEffects {
@@ -16,8 +16,8 @@ export class PhotoEffects {
       @Effect()
       loadPhotos$: Observable<Action> = this.actions$.pipe(
         ofType(PhotoActionTypes.LoadAction),
-        switchMap((action: LoadPhoto) => this.photosService.getAlbumPhotos(action.payload).pipe(
-          map(photos => (new LoadPhotoSuccess(photos)))
+        switchMap((action: LoadPhotos) => this.photosService.getAlbumPhotos(action.payload).pipe(
+          map(photos => (new LoadPhotosSuccess(photos)))
         ))
       );
 

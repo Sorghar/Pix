@@ -4,8 +4,7 @@
     <h2>Albums</h2>
     <ul class="albums">
       <li *ngFor="let a of filteredAlbums$ | async"
-          [routerLink]="['/albums', a.id]"
-          [ngClass]="a.id === (currentAlbum$ | async)?.id ? 'selected' : ''">
+          [routerLink]="['/albums', a.id]" routerLinkActive="selected">
         {{a.title}}
       </li>
     </ul>

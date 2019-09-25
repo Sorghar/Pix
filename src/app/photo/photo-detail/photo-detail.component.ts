@@ -19,6 +19,7 @@ export class PhotoDetailComponent implements OnInit, OnDestroy {
   currentPhoto$: Observable<Photo>;
   sub: Subscription;
   photoSub: Subscription;
+  albumSub: Subscription;
   currentAlbumId: number;
 
   constructor(
@@ -29,7 +30,7 @@ export class PhotoDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentPhoto$ = this.store.pipe(select(getCurrentPhoto));
-    this.store.select(getCurrentAlbum).subscribe(x => this.currentAlbumId = x ? x.id : 0);
+    this.albumSub = this.store.select(getCurrentAlbum).subscribe(x => this.currentAlbumId = x ? x.id : 0);
     this.dispatchAction();
     this.sub = this.router.events.subscribe((e: Event) => {
       if (e instanceof NavigationEnd) {
@@ -44,8 +45,16 @@ export class PhotoDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
     this.sub.unsubscribe();
-    this.photoSub.unsubscribe();
+    if (this.photoSub) {
+      this.photoSub.unsubscribe();
+    }
+    if (this.albumSub) {
+      this.albumSub.unsubscribe();
+    }
   }
 
   showPhoto(goNext: boolean) {
@@ -57,7 +66,11 @@ export class PhotoDetailComponent implements OnInit, OnDestroy {
         const nextPhoto = photos.indexOf(photo) + (goNext ? 1 : -1);
         return photos[nextPhoto] ? photos[nextPhoto] : photo;
       }),
-    ).subscribe(x => this.router.navigate(['albums', this.currentAlbumId, 'photos', x.id]));
+    ).subscribe(photo => {
+      if (photo) {
+        this.router.navigate(['albums', this.currentAlbumId, 'photos', photo.id]);
+      }
+    });
   }
 
 

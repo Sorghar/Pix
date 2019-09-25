@@ -1,1 +1,12 @@
-<p>new-photo works!</p>
+<form [formGroup]="photoForm" (ngSubmit)="onSubmit()" style="text-align: left">
+    <div class="form-group">
+        <label for="title">New photo title&nbsp;</label>
+        <input type="text" id="title" formControlName="title" class="form-control" placeholder="Title">
+    </div>
+    <label for="file">File:</label>
+    <div class="form-group">
+        <input type="text" formControlName="file" class="form-control" id="file" placeholder="URL">
+    </div>
+    <hr>
+    <button type="submit" [disabled]="!photoForm.valid" class="btn btn-primary">Submit</button>
+</form>

@@ -7,6 +7,11 @@ export function photoReducer(state = initialState, action: PhotoActions): PhotoS
       return { ...state, currentAlbumPhotos: action.payload };
     case PhotoActionTypes.SetCurrentPhotoId:
       return { ...state, currentPhotoId: action.payload };
+    case PhotoActionTypes.UploadPhotoSuccess:
+      return { ...state,
+               currentAlbumPhotos: [...state.currentAlbumPhotos, action.payload],
+               currentPhotoId: action.payload.id
+              };
     default:
       return state;
   }

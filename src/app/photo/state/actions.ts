@@ -4,7 +4,10 @@ import { Action } from '@ngrx/store';
 export enum PhotoActionTypes {
   LoadAction = '[Photo] Load',
   LoadActionSuccess = '[Photo] Load success',
-  SetCurrentPhotoId = '[Photo] Set Current Photo Id'
+  SetCurrentPhotoId = '[Photo] Set Current Photo Id',
+  UploadPhoto = '[Photo] Upload photo',
+  UploadPhotoSuccess = '[Photo] Upload photo success',
+  UploadPhotoFailure = '[Photo] Upload photo failure'
 }
 
 export class LoadPhotos implements Action {
@@ -22,7 +25,25 @@ export class SetCurrentPhotoId implements Action {
   constructor(public payload: number) {}
 }
 
+export class UploadPhoto implements Action {
+  readonly type = PhotoActionTypes.UploadPhoto;
+  constructor(public payload: Photo) {}
+}
+
+export class UploadPhotoSuccess implements Action {
+  readonly type = PhotoActionTypes.UploadPhotoSuccess;
+  constructor(public payload: Photo) {}
+}
+
+export class UploadPhotoFailure implements Action {
+  readonly type = PhotoActionTypes.UploadPhotoFailure;
+  constructor(public payload: string) {}
+}
+
 export type PhotoActions =
   LoadPhotos |
   LoadPhotosSuccess |
-  SetCurrentPhotoId;
+  SetCurrentPhotoId |
+  UploadPhoto |
+  UploadPhotoSuccess |
+  UploadPhotoFailure;
